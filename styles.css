@@ -1,0 +1,138 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #18181b, #27272a);
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+header {
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff4584; /* Rosa vibrante */
+    margin-bottom: 10px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+h1 a {
+    text-decoration: none;
+    color: #ff4584;
+    transition: color 0.3s ease-in-out;
+}
+
+h1 a:hover {
+    color: #ff7eb9; /* Rosa más claro al pasar el ratón */
+}
+
+#stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Máximo 3 columnas */
+    gap: 20px; /* Espacio entre los streams */
+    margin: 20px auto;
+    max-width: 1200px; /* Ancho máximo del contenedor */
+}
+
+.stream-stats {
+    padding: 20px;
+    background-color: #1e1e20;
+    border-radius: 15px;
+    border-left: 5px solid #ff4584; /* Borde lateral rosa */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.stream-stats:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.stream-stats p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #d4d4d8; /* Gris claro */
+    transition: color 0.3s ease-in-out;
+}
+
+.stream-stats p:hover {
+    color: #ffffff; /* Blanco al pasar el ratón */
+}
+
+.stream-stats a {
+    color: #6ee7b7; /* Verde cian brillante */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.stream-stats a:hover {
+    color: #34d399; /* Verde más claro al pasar el ratón */
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #a1a1aa;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Botón de "Volver arriba" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff4584;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease-in-out;
+    display: none; /* Oculto por defecto */
+}
+
+.back-to-top:hover {
+    background-color: #ff7eb9; /* Rosa más claro al pasar el ratón */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    #stats {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+    }
+
+    .stream-stats {
+        padding: 15px;
+    }
+}
