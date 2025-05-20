@@ -2,19 +2,19 @@ const CLIENT_ID = 'gp762nuuoqcoxypju8c569th9wz7q5';
 const ACCESS_TOKEN = '5m19dxrep50mtenu8wj6k3lzn94nt2'; 
 const BASE_URL = 'https://api.twitch.tv/helix';
 
-// Mostrar el indicador de carga
+
 function showLoading() {
     const loading = document.getElementById('loading');
     loading.style.display = 'block';
 }
 
-// Ocultar el indicador de carga
+
 function hideLoading() {
     const loading = document.getElementById('loading');
     loading.style.display = 'none';
 }
 
-// Obtener datos del video
+
 async function getVideoData(videoId) {
     const response = await fetch(`${BASE_URL}/videos?id=${videoId}`, {
         method: 'GET',
@@ -32,7 +32,7 @@ async function getVideoData(videoId) {
     return data.data[0];
 }
 
-// Obtener datos del usuario
+
 async function getUserData() {
     const response = await fetch(`${BASE_URL}/users?login=AZAZiNS_`, {
         method: 'GET',
@@ -50,7 +50,7 @@ async function getUserData() {
     return data.data[0];
 }
 
-// Obtener datos del stream en vivo
+
 async function getLiveStreamData(userId) {
     const response = await fetch(`${BASE_URL}/streams?user_id=${userId}`, {
         method: 'GET',
@@ -68,7 +68,7 @@ async function getLiveStreamData(userId) {
     return data.data[0]; 
 }
 
-// Generar HTML para las estadísticas
+
 function generateStatsHTML(userData, videoData, liveStreamData) {
     const isLive = !!liveStreamData;
 
@@ -99,13 +99,13 @@ function generateStatsHTML(userData, videoData, liveStreamData) {
     `;
 }
 
-// Cargar estadísticas de múltiples streams
+
 async function loadMultipleStats(videoIds) {
     const statsSection = document.getElementById('stats');
     statsSection.innerHTML = ''; 
 
     try {
-        // Mostrar el indicador de carga
+        
         showLoading();
 
         const userData = await getUserData();
@@ -133,10 +133,10 @@ async function loadMultipleStats(videoIds) {
             <p>${error.message}</p>
         `;
     } finally {
-        // Ocultar el indicador de carga
+        
         hideLoading();
     }
 }
 
-// Cargar las estadísticas al cargar la página
-window.onload = () => loadMultipleStats(['2434713502', '2431004981', '2428546683', '2428202204', '2422309046', '2414490487', '2411574773', '2409999173', '2399376304', '2399373062', '2398849333', '2398057051', '2395598998', '2437226114', '2436628942', '2393630252', '2392684281', '2391836743', '2390035634']);
+
+window.onload = () => loadMultipleStats(['2434713502', '2431004981', '2428546683', '2428202204', '2422309046', '2414490487', '2411574773', '2437226114', '2436628942', '2393630252', '2462370480', '2461265438', '2458813471', '2457976394', '2456765128', '2455329514', '2453803515', '2452840519']);
