@@ -25,11 +25,12 @@ async function getVideoData(videoId) {
     });
 
     if (!response.ok) {
-        throw new Error(`Error al obtener datos del video: ${response.status} - ${response.statusText}`);
+        
+        return null;
     }
 
     const data = await response.json();
-    return data.data[0];
+    return data.data[0] || null; 
 }
 
 
@@ -102,10 +103,9 @@ function generateStatsHTML(userData, videoData, liveStreamData) {
 
 async function loadMultipleStats(videoIds) {
     const statsSection = document.getElementById('stats');
-    statsSection.innerHTML = ''; 
+    statsSection.innerHTML = '';
 
     try {
-        
         showLoading();
 
         const userData = await getUserData();
@@ -113,30 +113,25 @@ async function loadMultipleStats(videoIds) {
         for (const videoId of videoIds) {
             try {
                 const videoData = await getVideoData(videoId);
-                const liveStreamData = await getLiveStreamData(userData.id); 
+
+                
+                if (!videoData) continue;
+
+                const liveStreamData = await getLiveStreamData(userData.id);
                 const statsHTML = generateStatsHTML(userData, videoData, liveStreamData);
-                statsSection.innerHTML += statsHTML; 
+                statsSection.innerHTML += statsHTML;
             } catch (error) {
-                console.error(`Error al cargar las estadísticas del video ${videoId}:`, error);
-                statsSection.innerHTML += `
-                    <div class="stream-stats">
-                        <h2>Error al cargar las estadísticas</h2>
-                        <p>${error.message}</p>
-                    </div>
-                `;
+                console.error(`Error procesando video ${videoId}:`, error);
+                continue; 
             }
         }
     } catch (error) {
-        console.error('Error al obtener datos del usuario:', error);
-        statsSection.innerHTML = `
-            <h2>Error al cargar las estadísticas</h2>
-            <p>${error.message}</p>
-        `;
+        console.error('Error general:', error);
+        statsSection.innerHTML = `<p>Error al cargar las estadísticas: ${error.message}</p>`;
     } finally {
-        
         hideLoading();
     }
 }
 
 
-window.onload = () => loadMultipleStats(['2434713502', '2431004981', '2428546683', '2428202204', '2422309046', '2414490487', '2411574773', '2437226114', '2436628942', '2393630252', '2462370480', '2461265438', '2458813471', '2457976394', '2456765128', '2455329514', '2453803515', '2452840519']);
+window.onload = () => loadMultipleStats(['2434713502', '2431004981', '2428546683', '2428202204', '2422309046', '2414490487', '2411574773', '2437226114', '2436628942', '2462370480', '2461265438', '2458813471', '2457976394', '2456765128', '2455329514', '2453803515', '2452840519', '2393630252']);
